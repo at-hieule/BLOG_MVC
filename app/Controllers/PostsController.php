@@ -32,7 +32,8 @@
                     $data['description'] = $_POST['description'];
                     $data['content'] = $_POST['content'];
                     $data['author'] = Session::get('username');
-                    $data['created_at'] = date('Y-m-d');
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                    $data['created_at'] = date('Y-m-d H:i:s');
                     $post->add($data);
                     header('location:/home/index');
             }
