@@ -103,6 +103,9 @@ body {
 <div class="login-page">
 	<h2 align="center">Login Page</h2>
   <div class="form">
+    <?php if(isset($error)){ ?>
+      <span style="color: red; padding-bottom: 10px;">Error !  <?php echo $error; ?></span>
+    <?php  } ?>
     <form class="login-form" action="/users/login" method="post">
       <input type="text" placeholder="username" name="username" />
       <input type="password" placeholder="password" name="password" />

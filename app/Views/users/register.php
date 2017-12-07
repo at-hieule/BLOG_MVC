@@ -102,13 +102,12 @@ body {
 </style>
 <div class="login-page">
   <h2 align="center">Register</h2>
-  <?php 
-          // if (isset($msg)) {
-          //   echo $msg;
-          // }
-          // var_dump($result);
-        ?>
   <div class="form">
+
+    <?php if(isset($error)){ ?>
+      <span style="color: red; padding-bottom: 10px;">Error! <?php echo $error; ?></span>
+    <?php  } ?>
+      
     <form class="login-form" action="/users/register" method="post">
       <input type="text" name="username" placeholder="username"/>
       <input type="password" name="password" placeholder="password"/>

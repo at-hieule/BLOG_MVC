@@ -51,12 +51,6 @@
               <a class="nav-link" href="/posts/add">Post</a>
             </li>
             <?php endif; ?>
-            <li class="nav-item">
-              <a class="nav-link" href="/home/about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/home/contact">Contact</a>
-            </li>
             <?php 
             if(Session::get('username') != NULL) :?>
             <li class="nav-item">
