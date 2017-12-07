@@ -5,11 +5,17 @@
 
     class HomeController extends Controller
     {
-        
-        public function index()
+        public function index($index = 1)
         {
             $post = new Post();
-            $posts['arrPosts'] = $post->getAll();
-        	view('home.index',$posts);
+            $totalRecords= $post->rowCount();
+            $recordPerPage = 2;
+            $totalPage = ceil($totalRecords/$recordPerPage);
+            $data['totalPage']= $totalPage;
+            $offset = ($index-1)*$recordPerPage;
+            $posts = $post->checkLimit($offset,2);
+            $data['posts'] = $posts;
+        	view('home.index',$data);
 		    }
     }
+    
