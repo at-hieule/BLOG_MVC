@@ -4,12 +4,12 @@ namespace App\Models;
 
 class Post extends Model
 {
-    protected $table = 'posts';
+  protected $table = 'posts';
 
-   public function add($data){
-      $sql = "INSERT INTO posts(title, description, content,author, created_at) VALUES (:title,:description,:content,:author,:created_at)";
-      $stmt = static::$db->prepare($sql);
-      $data = array(
+  public function add($data){
+    $sql = "INSERT INTO posts(title, description, content,author, created_at) VALUES (:title,:description,:content,:author,:created_at)";
+    $stmt = static::$db->prepare($sql);
+    $data = array(
       'title' => $data['title'],
       'description' => $data['description'],
       'content' => $data['content'],
@@ -17,25 +17,19 @@ class Post extends Model
       'created_at' => $data['created_at'],
     );
     $stmt->execute($data);
-   }
-   public function getAll()
-    {
-    	$sql = "SELECT * FROM {$this->table}";
-            $stmt = static::$db->prepare($sql);
-            $stmt->execute();
-
-            return $stmt->fetchAll();
-    }
-    public function checkLimit($offset,$recordPerPage)
-    {
-      $limit = "LIMIT $offset,$recordPerPage";
-      $query = "SELECT * FROM users".$limit; 
-      $result = $conn->prepare($query);
-      $result->execute();
-      $totalRecords = $result->rowCount();
-
-    }
-
-
+  }
+ public function rowCount()
+ {
+  $sql = "SELECT * FROM {$this->table}";
+  $stmt = static::$db->prepare($sql);
+  $stmt->execute();
+  return $stmt->rowCount();
+ }
+ public function checkLimit($offset, $recordPerPage)
+ {
+  $sql = "SELECT * FROM {$this->table} limit $offset, $recordPerPage";
+   $stmt = static::$db->prepare($sql);
+   $stmt->execute();
+   return $stmt->fetchAll();
+  }
 }
-
