@@ -20,7 +20,7 @@ class User extends Model
 		$users = array(
 			'username' => $users['username'],
 			'password' => $users['password'],
-			'fullname' => $users['content'],
+			'fullname' => $users['fullname'],
 		);
 		$stmt->execute($users);       
    }

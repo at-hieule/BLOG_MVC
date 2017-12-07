@@ -1,4 +1,5 @@
-<?php require_once '../app/Views/layouts/header.php'; ?>
+<?php require_once '../app/Views/layouts/header.php';
+ ?>
 <header class="masthead" style="background-image: url('/img/home-bg.jpg')">
       <div class="overlay"></div>
       <div class="container">
@@ -6,6 +7,10 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
               <div align="center">
+                <?php if(isset($error)){ ?>
+                  <span style="color: red">Error! <?php echo $error; ?></span>
+                <?php  } ?>
+               
                 <form action="/posts/add" method="post">
                   <div class="form-group row">
                     <label>Title</label>

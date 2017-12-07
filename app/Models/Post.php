@@ -26,6 +26,15 @@ class Post extends Model
 
             return $stmt->fetchAll();
     }
+    public function checkLimit($offset,$recordPerPage)
+    {
+      $limit = "LIMIT $offset,$recordPerPage";
+      $query = "SELECT * FROM users".$limit; 
+      $result = $conn->prepare($query);
+      $result->execute();
+      $totalRecords = $result->rowCount();
+
+    }
 
 
 }

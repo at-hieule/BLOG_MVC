@@ -15,12 +15,29 @@
                 $users['username'] = $_POST['username'];
                 $users['password'] = $_POST['password'];
                 $users['fullname'] = $_POST['fullname'];
-                $user->addUser($users);
-                header('location:/home/index');
+                if(($users['username'] == NULL) || ($users['password']== NULL) 
+                    || ($users['fullname'] == NULL)){
+                    $error ="Please fill out all fields";
+                }
+                else if(strlen($users['username']) < 6){
+                    $error ="Username must be at least 6 character";  
+                }
+                else if(strlen($users['password']) < 6){
+                    $error ="Password must be at least 6 character";
+                }
+                elseif (is_numeric($users['fullname'])) {
+                    $error ="Fullname invalid. Fullname must be character";
+                }
+                else{
+                    Session::set('username',$users['username']);
+                    $user->addUser($users);
+                    header('location:/home/index');
+                }  
+                if (isset($error)) {
+                    $data['error'] = $error;
+                    view('users.register',$data);
+                }    
             }
-
-            $user = new User();
-
             view('users.register');
         }
         public function login()
@@ -30,16 +47,19 @@
                 $users = array();
                 $users['username'] = $_POST['username'];
                 $users['password'] = $_POST['password'];
-                $user->checkUser($users);
-                if($user->checkUser($users)){
+                $users = $user->checkUser($users);
+                if($users == 0) {
+                    $error = "Username or password is incorrect";
+                    $data['error'] = $error;
+                    view('users.login',$data);
+                }
+                
+                else {
 
                     Session::set('username',$users['username']);
                     header('location:/home/index');
                 }
-                else {
-
-                header('location:/users/register');
-                    }
+                
             }
 
             view('users.login');

@@ -11,17 +11,5 @@
             $post = new Post();
             $posts['arrPosts'] = $post->getAll();
         	view('home.index',$posts);
-		}
-        public function about()
-        {
-
-            view('home.about');
-        }
-        public function contact()
-        {
-
-            view('home.contact');
-        }
-        
-
+		    }
     }
