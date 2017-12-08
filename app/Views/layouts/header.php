@@ -1,6 +1,4 @@
 <?php use App\Core\Session; 
-      Session::start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
