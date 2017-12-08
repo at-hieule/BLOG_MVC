@@ -14,9 +14,10 @@ class UsersController extends Controller
       $users = array();
       $users['username'] = $_POST['username'];
       $users['password'] = $_POST['password'];
+      $users['re-password'] = $_POST['re-password'];
       $users['fullname'] = $_POST['fullname'];
       if(($users['username'] == NULL) || ($users['password'] == NULL) 
-        || ($users['fullname'] == NULL)){
+        || ($users['fullname'] == NULL) || ($users['re-password'] == NULL)){
         $error ="Please fill out all fields";
     }
     else if(strlen($users['username']) < 6){
@@ -25,8 +26,11 @@ class UsersController extends Controller
     else if(strlen($users['password']) < 6){
       $error ="Password must be at least 6 character";
     }
-    elseif (is_numeric($users['fullname'])) {
+    else if (is_numeric($users['fullname'])) {
       $error ="Fullname invalid. Fullname must be character";
+    }
+    else if ($users['password'] != $users['re-password'] ) {
+      $error = "Password not match";
     }
     else{
       Session::set('username',$users['username']);
@@ -63,7 +67,6 @@ public function login()
 }
 public function logout()
 {
-  Session::start();
   Session::destroy();
   header('location:/home/index');
 }

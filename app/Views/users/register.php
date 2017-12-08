@@ -111,6 +111,7 @@ body {
     <form class="login-form" action="/users/register" method="post">
       <input type="text" name="username" placeholder="username"/>
       <input type="password" name="password" placeholder="password"/>
+      <input type="password" name="re-password" placeholder="confirm password"/>
       <input type="text" name="fullname" placeholder="fullname"/>
       <input type="submit" name="btn_register" value="Register">
       <p class="message"><a href="login">Login</a></p>
