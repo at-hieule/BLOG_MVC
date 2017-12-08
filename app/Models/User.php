@@ -5,15 +5,6 @@ namespace App\Models;
 class User extends Model
 {
     protected $table = 'users';
-
-    public function getAll()
-    {
-    	$sql = "SELECT * FROM {$this->table}";
-            $stmt = static::$db->prepare($sql);
-            $stmt->execute();
-
-            return $stmt->fetchAll();
-    }
     public function addUser($users){
    			$sql = "INSERT INTO users(username, password, fullname) VALUES (:username,:password,:fullname)";
     	$stmt = static::$db->prepare($sql);

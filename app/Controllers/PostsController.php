@@ -13,7 +13,6 @@ class PostsController extends Controller
   }
 
   public function add(){
-    Session::start();
     if(Session::get('username') !=NULL){
       if(isset($_POST['add'])){
         $post = new Post();
